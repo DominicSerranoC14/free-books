@@ -19,14 +19,15 @@
             <ul class="navbar-nav ml-auto">
                 <li 
                     v-if="isAuthed" 
-                    class="nav-item dropdown">
-                    <div class="d-flex">
+                    class="nav-item dropdown user-dropdown-menu">
+                    <div class="row">
                         <div 
                             v-if="userPhotoUrl" 
                             class="user-image-container mr-2">
                             <img 
                                 :src="userPhotoUrl" 
                                 alt="Profile Image">
+                                
                         </div>
 
                         <span 
@@ -37,7 +38,7 @@
                         </span>
 
                         <div 
-                            class="dropdown-menu" 
+                            class="dropdown-menu col-md-12 col-sm-12" 
                             aria-labelledby="navbarDropdownMenuLink">
                             <router-link 
                                 to="/dashboard" 
@@ -47,6 +48,17 @@
                                 @click="firebaseLogout">Logout</span>
                         </div>
                     </div>
+                </li>
+
+                <li 
+                    v-if="isAuthed" 
+                    class="nav-item dropdown user-dropdown-mobile-menu">
+                    <router-link 
+                        to="/dashboard" 
+                        class="nav-link">Dashboard</router-link>
+                    <span 
+                        class="nav-link" 
+                        @click="firebaseLogout">Logout</span>
                 </li>
 
                 <li 
@@ -88,8 +100,23 @@ export default {
 
 <style scoped>
 .user-image-container img {
-  max-height: 40px;
-  border-radius: 50%;
+    max-height: 40px;
+    border-radius: 50%;
+}
+
+.user-dropdown-mobile-menu {
+    display: none;
+}
+
+/* Media query for reorienting user dropdown menu on smaller screens */
+@media (max-width: 992px) {
+    .user-dropdown-menu {
+        display: none;
+    }
+
+    .user-dropdown-mobile-menu {
+        display: block;
+    }
 }
 </style>
 

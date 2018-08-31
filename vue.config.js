@@ -3,5 +3,14 @@ module.exports = {
         ? '/free-books/'
         : '/',
 
+    css: {
+        loaderOptions: {
+            css: {
+                test: /\.css$/,
+                use: ['style-loader', 'css-loader']
+            }
+        },
+    },
+
     outputDir: 'docs'
 };

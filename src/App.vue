@@ -11,8 +11,8 @@
 </template>
 
 <script>
-import Navbar from "@/Views/Navbar.vue";
-import Loader from "@/Components/Loader.vue";
+import Navbar from "@/Components/Pages/Navbar.vue";
+import Loader from "@/Components/Global/Loader.vue";
 import authMixin from "@/Services/Firebase/auth";
 
 export default {

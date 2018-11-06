@@ -6,6 +6,11 @@ const provider = new firebase.auth.GoogleAuthProvider();
 
 export const getCurrentUser = () => firebase.auth().currentUser;
 
+export const getCurrentUserUid = () => {
+    const { uid } = getCurrentUser();
+    return uid ? uid : null;
+}
+
 export default {
     methods: {
         async firebaseLogout() {

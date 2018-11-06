@@ -1,8 +1,8 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import { getCurrentUser } from '@/Services/Firebase/auth';
-import Login from '@/Components/Login.vue';
-import Dashboard from '@/Components/Dashboard.vue';
+import Login from '@/Components/Pages/Login.vue';
+import Dashboard from '@/Components/Pages/Dashboard/Dashboard.vue';
 
 Vue.use(Router);
 

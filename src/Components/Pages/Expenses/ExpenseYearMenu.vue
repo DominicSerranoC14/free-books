@@ -1,8 +1,6 @@
 <template>
-    <div class="row flex-column border px-3">
-        <create-expense-year-form 
-            :add-expense-year="addExpenseYear"
-            class="my-4" />
+    <div class="row flex-column px-3">
+        <create-expense-year-form :add-expense-year="addExpenseYear" />
 
         <loader 
             v-if="!allExpenseYears.length" 
@@ -35,7 +33,7 @@ export default {
     },
 
     async mounted() {
-        this.allExpenseYears = await this.getAllExpenseYears();
+        this.allExpenseYears = await this.$getAllExpenseYears();
     },
 
     methods: {

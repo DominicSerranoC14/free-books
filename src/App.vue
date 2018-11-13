@@ -35,8 +35,8 @@ export default {
     async created() {
         this.loading = true;
         // Set auth listeners
-        this.setAuthStateChangedListener();
-        await this.setGoogleRedirectListener();
+        this.$setAuthStateChangedListener();
+        await this.$setGoogleRedirectListener();
 
         this.loading = false;
     }

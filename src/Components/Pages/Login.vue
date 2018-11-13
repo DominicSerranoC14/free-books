@@ -5,7 +5,7 @@
         <div class="col-md-12 mt-4">
             <button 
                 class="btn btn-primary" 
-                @click="googleRedirectSignIn">
+                @click="$googleRedirectSignIn">
                 Sign In With Google
                 <i class="fa fa-google-plus-official" />
             </button>

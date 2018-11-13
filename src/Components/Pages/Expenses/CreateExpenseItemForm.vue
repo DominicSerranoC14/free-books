@@ -1,5 +1,5 @@
 <template>
-    <div class="row border py-3">
+    <div class="row py-3">
         <h5 class="col-md-12">Create an expense item.</h5>
 
         <div class="col-md-12">

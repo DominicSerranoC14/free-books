@@ -13,7 +13,7 @@ export const getCurrentUserUid = () => {
 
 export default {
     methods: {
-        async firebaseLogout() {
+        async $firebaseLogout() {
             try {
                 await firebase.auth().signOut();
             } catch (error) {
@@ -21,11 +21,11 @@ export default {
             }
         },
 
-        googleRedirectSignIn() {
+        $googleRedirectSignIn() {
             firebase.auth().signInWithRedirect(provider);
         },
 
-        setAuthStateChangedListener() {
+        $setAuthStateChangedListener() {
             firebase.auth().onAuthStateChanged((user) => {
                 if (user) {
                     this.isAuthed = true;
@@ -37,7 +37,7 @@ export default {
             });
         },
 
-        async setGoogleRedirectListener() {
+        async $setGoogleRedirectListener() {
             try {
                 const { user } = await firebase.auth().getRedirectResult();
 

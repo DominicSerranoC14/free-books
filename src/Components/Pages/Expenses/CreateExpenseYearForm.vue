@@ -42,7 +42,7 @@ export default {
 
     methods: {
         async handleSaveClick() {
-            const newExspenseYear = await this.createExpenseYear(this.expenseYear);
+            const newExspenseYear = await this.$createExpenseYear(this.expenseYear);
             
             if (newExspenseYear) this.addExpenseYear(newExspenseYear);
         }

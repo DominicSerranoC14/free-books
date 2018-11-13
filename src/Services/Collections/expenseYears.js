@@ -6,7 +6,7 @@ const EXPENSE_YEARS = 'expenseYears';
 
 export default {
     methods: {
-        async createExpenseYear(year) {
+        async $createExpenseYear(year) {
             try {
                 const { docs } = await db.collection(EXPENSE_YEARS).where('year', '==', year).get();
                 const expenseYears = docs.map(doc => doc.data().year);
@@ -21,7 +21,7 @@ export default {
             }
         },
 
-        async getAllExpenseYears() {
+        async $getAllExpenseYears() {
             try {
                 const { docs } = await db.collection(EXPENSE_YEARS).where('uid', '==', getCurrentUserUid()).get();
 

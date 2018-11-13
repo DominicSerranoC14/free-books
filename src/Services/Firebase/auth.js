@@ -29,7 +29,7 @@ export default {
             firebase.auth().onAuthStateChanged((user) => {
                 if (user) {
                     this.isAuthed = true;
-                    this.$router.push('/dashboard');
+                    this.$router.push('/expenses');
                 } else {
                     this.isAuthed = false;
                     this.$router.push('/login');
@@ -43,7 +43,7 @@ export default {
 
                 if (user) {
                     this.isAuthed = true;
-                    this.$router.push('/dashboard');
+                    this.$router.push('/expenses');
                 }
             } catch (error) {
                 this.$swal('Coult not sign in with Google.');

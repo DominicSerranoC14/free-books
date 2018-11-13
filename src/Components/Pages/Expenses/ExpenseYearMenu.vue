@@ -1,7 +1,11 @@
 <template>
-    <div class="d-flex flex-column border">
+    <div class="row flex-column border px-3">
         <create-expense-year-form 
             :add-expense-year="addExpenseYear"
+            class="my-4" />
+
+        <loader 
+            v-if="!allExpenseYears.length" 
             class="my-4" />
 
         <div 
@@ -15,10 +19,11 @@
 <script>
 import CreateExpenseYearForm from './CreateExpenseYearForm';
 import ExpenseYearList from './ExpenseYearList';
+import Loader from '@/Components/Global/Loader';
 import ExpenseYearMixins from '@/Services/Collections/expenseYears';
 
 export default {
-    components: { CreateExpenseYearForm, ExpenseYearList },
+    components: { CreateExpenseYearForm, ExpenseYearList, Loader },
 
     mixins: [ ExpenseYearMixins ],
 

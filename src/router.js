@@ -7,7 +7,8 @@ import Expenses from '@/Components/Pages/Expenses/Expenses.vue';
 Vue.use(Router);
 
 const router = new Router({
-    mode: 'history',
+    // TODO: does this work with github?
+    // mode: 'history',
 
     routes: [
         {

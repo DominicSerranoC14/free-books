@@ -2,7 +2,7 @@
     <div id="app">
         <navbar :is-authed="isAuthed"/>
 
-        <div class="container mt-4">
+        <div class="app-container my-4">
             <loader v-if="loading"/>
 
             <router-view v-else />
@@ -42,4 +42,12 @@ export default {
     }
 };
 </script>
+
+<style lang="scss" scoped>
+.app-container {
+    width: 80vw;
+    margin: auto;
+}
+</style>
+
 

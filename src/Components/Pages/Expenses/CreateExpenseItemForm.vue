@@ -85,25 +85,20 @@ import moment from 'moment';
 
 import expenseItemsMixin from '@/Services/Collections/expenseItems';
 
-const todaysDate = moment();
+const initialExpenseItem = { amount: '', category: '0', date: '' };
 
 export default {
     mixins: [ expenseItemsMixin ],
 
     props: {
-        expenseCategories: { type: Array, default: null }
+        addExpenseItem: { type: Function, required: true },
+        expenseCategories: { type: Array, default: null },
+        selectedExpenseYear: { type: String, default: () => '' }
     },
 
     data() {
         return {
-            currentYear: todaysDate.format('YYYY'),
-            expenseItem: {
-                amount: '',
-                category: '0',
-                date: ''
-            },
-            expenseEndDate: todaysDate.endOf('year').format('YYYY-MM-DD'),
-            expenseStartDate: todaysDate.startOf('year').format('YYYY-MM-DD')
+            expenseItem: { ...initialExpenseItem },
         }
     },
 
@@ -112,13 +107,35 @@ export default {
             const { amount, category, date } = this.expenseItem;
 
             return (!amount || !date || category === '0');
+        },
+
+        currentYear() {
+            return this.selectedExpenseYear && moment(this.selectedExpenseYear, 'YYYY');
+        },
+
+        expenseEndDate() {
+            return this.currentYear && this.currentYear.endOf('year').format('YYYY-MM-DD');
+        },
+
+        expenseStartDate() {
+            return this.currentYear && this.currentYear.startOf('year').format('YYYY-MM-DD');
         }
     },
 
     methods: {
         async handleCreateExpense() {
-            const expenseItem = await this.$createExpenseItem(this.expenseItem);
-            console.log(expenseItem);
+            const payload = { ...this.expenseItem, year: this.currentYear.format('YYYY') };
+            const expenseItem = await this.$createExpenseItem(payload);
+
+            // Error has occured, don't reset form
+            if (!expenseItem) return;
+
+            this.addExpenseItem(expenseItem);
+            this.resetExpenseItem();
+        },
+
+        resetExpenseItem() {
+            this.expenseItem = { ...initialExpenseItem };
         }
     }
 }

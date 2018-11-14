@@ -3,13 +3,22 @@
         <create-expense-year-form :add-expense-year="addExpenseYear" />
 
         <loader 
-            v-if="!allExpenseYears.length" 
+            v-if="!allExpenseYears" 
             class="my-4" />
 
         <div 
-            v-if="allExpenseYears.length" 
+            v-if="allExpenseYears && !allExpenseYears.length" 
             class="my-4">
-            <expense-year-list :all-expense-years="allExpenseYears" />
+            No current expense years, please create one.
+        </div>
+
+        <div 
+            v-if="allExpenseYears && allExpenseYears.length" 
+            class="my-4">
+            <expense-year-list 
+                :all-expense-years="allExpenseYears" 
+                :set-expense-year="setExpenseYear"
+            />
         </div>
     </div>
 </template>
@@ -18,34 +27,16 @@
 import CreateExpenseYearForm from './CreateExpenseYearForm';
 import ExpenseYearList from './ExpenseYearList';
 import Loader from '@/Components/Global/Loader';
-import ExpenseYearMixins from '@/Services/Collections/expenseYears';
 
 export default {
     components: { CreateExpenseYearForm, ExpenseYearList, Loader },
 
-    mixins: [ ExpenseYearMixins ],
-
-    data() {
-        return {
-            allExpenseYears: [],
-            expenses: [],
-        }
-    },
-
-    async mounted() {
-        this.allExpenseYears = await this.$getAllExpenseYears();
-    },
-
-    methods: {
-        addExpenseYear(year) {
-            this.allExpenseYears.push(year);
-        },
+    props: {
+        addExpenseYear: { type: Function, required: true },
+        allExpenseYears: { type: Array, default: () => [] },
+        setExpenseYear: { type: Function, required: true }
     }
 }
 </script>
-
-<style scoped>
-
-</style>
 
 

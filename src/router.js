@@ -7,6 +7,8 @@ import Expenses from '@/Components/Pages/Expenses/Expenses.vue';
 Vue.use(Router);
 
 const router = new Router({
+    mode: 'history',
+
     routes: [
         {
             path: '/login',

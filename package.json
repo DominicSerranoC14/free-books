@@ -21,7 +21,8 @@
         "style-loader": "^0.23.0",
         "vue": "^2.5.17",
         "vue-router": "^3.0.1",
-        "vue-sweetalert2": "^1.5.3"
+        "vue-sweetalert2": "^1.5.3",
+        "vue-tables-2": "^1.4.70"
     },
     "devDependencies": {
         "@vue/cli-plugin-babel": "^3.0.0",

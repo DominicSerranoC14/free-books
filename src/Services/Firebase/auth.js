@@ -13,7 +13,7 @@ export const getCurrentUserUid = () => {
 
 export default {
     methods: {
-        async firebaseLogout() {
+        async $firebaseLogout() {
             try {
                 await firebase.auth().signOut();
             } catch (error) {
@@ -21,15 +21,15 @@ export default {
             }
         },
 
-        googleRedirectSignIn() {
+        $googleRedirectSignIn() {
             firebase.auth().signInWithRedirect(provider);
         },
 
-        setAuthStateChangedListener() {
+        $setAuthStateChangedListener() {
             firebase.auth().onAuthStateChanged((user) => {
                 if (user) {
                     this.isAuthed = true;
-                    this.$router.push('/dashboard');
+                    this.$router.push('/expenses');
                 } else {
                     this.isAuthed = false;
                     this.$router.push('/login');
@@ -37,13 +37,13 @@ export default {
             });
         },
 
-        async setGoogleRedirectListener() {
+        async $setGoogleRedirectListener() {
             try {
                 const { user } = await firebase.auth().getRedirectResult();
 
                 if (user) {
                     this.isAuthed = true;
-                    this.$router.push('/dashboard');
+                    this.$router.push('/expenses');
                 }
             } catch (error) {
                 this.$swal('Coult not sign in with Google.');

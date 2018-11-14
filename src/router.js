@@ -2,11 +2,13 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import { getCurrentUser } from '@/Services/Firebase/auth';
 import Login from '@/Components/Pages/Login.vue';
-import Dashboard from '@/Components/Pages/Dashboard/Dashboard.vue';
+import Expenses from '@/Components/Pages/Expenses/Expenses.vue';
 
 Vue.use(Router);
 
 const router = new Router({
+    mode: 'history',
+
     routes: [
         {
             path: '/login',
@@ -14,9 +16,9 @@ const router = new Router({
             component: Login
         },
         {
-            path: '/dashboard',
-            name: 'dashboard',
-            component: Dashboard,
+            path: '/expenses',
+            name: 'expenses',
+            component: Expenses,
             meta: {
                 requiresAuth: true
             }

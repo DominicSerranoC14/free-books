@@ -6,7 +6,8 @@
             <button 
                 v-for="({ year }) in allExpenseYears"
                 :key="year"
-                class="list-group-item list-group-item-action text-center py-2">{{ year }}</button>
+                class="list-group-item list-group-item-action text-center py-2"
+                @click="setExpenseYear(year)">{{ year }}</button>
         </div>
     </div>
 </template>
@@ -14,7 +15,8 @@
 <script>
 export default {
     props: {
-        allExpenseYears: { type: Array, required: true }
+        allExpenseYears: { type: Array, required: true },
+        setExpenseYear: { type: Function, required: true }
     }
 }
 </script>

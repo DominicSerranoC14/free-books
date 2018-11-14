@@ -2,7 +2,7 @@
     <div id="app">
         <navbar :is-authed="isAuthed"/>
 
-        <div class="container mt-4">
+        <div class="app-container my-4">
             <loader v-if="loading"/>
 
             <router-view v-else />
@@ -35,11 +35,19 @@ export default {
     async created() {
         this.loading = true;
         // Set auth listeners
-        this.setAuthStateChangedListener();
-        await this.setGoogleRedirectListener();
+        this.$setAuthStateChangedListener();
+        await this.$setGoogleRedirectListener();
 
         this.loading = false;
     }
 };
 </script>
+
+<style lang="scss" scoped>
+.app-container {
+    width: 80vw;
+    margin: auto;
+}
+</style>
+
 

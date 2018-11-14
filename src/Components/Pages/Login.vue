@@ -1,11 +1,11 @@
 <template>
     <div class="row text-center">
-        <h4 class="col-md-12">Welcome to something awesome! Please sign in.</h4>
+        <h4 class="col-md-12">Welcome to Free Books! Please sign in.</h4>
 
         <div class="col-md-12 mt-4">
             <button 
                 class="btn btn-primary" 
-                @click="googleRedirectSignIn">
+                @click="$googleRedirectSignIn">
                 Sign In With Google
                 <i class="fa fa-google-plus-official" />
             </button>

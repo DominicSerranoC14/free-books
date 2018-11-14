@@ -45,7 +45,7 @@
                                 class="dropdown-item">Dashboard</router-link>
                             <span 
                                 class="dropdown-item" 
-                                @click="firebaseLogout">Logout</span>
+                                @click="$firebaseLogout">Logout</span>
                         </div>
                     </div>
                 </li>
@@ -58,7 +58,7 @@
                         class="nav-link">Dashboard</router-link>
                     <span 
                         class="nav-link" 
-                        @click="firebaseLogout">Logout</span>
+                        @click="$firebaseLogout">Logout</span>
                 </li>
 
                 <li 

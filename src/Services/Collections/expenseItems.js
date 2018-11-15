@@ -1,5 +1,4 @@
-import db from '@/Services/Firebase/database.js';
-import { createDocument } from '@/Services/Firebase/collection.js';
+import { createDocument, fetchCollection } from '@/Services/Firebase/collection.js';
 import { getCurrentUserUid } from '@/Services/Firebase/auth.js';
 
 const EXPENSE_ITEMS = 'expenseItems';
@@ -15,9 +14,19 @@ export default {
             }
         },
         
+        async $deleteExpenseItem(itemKey) {
+            try {
+                await fetchCollection(EXPENSE_ITEMS).doc(itemKey).delete();
+
+                return itemKey;
+            } catch (error) {
+                this.$swal('Error', error.message, 'error');
+            }
+        },
+        
         async $getExpenseItemsByYear(year) {
             try {
-                const { docs } = await db.collection(EXPENSE_ITEMS)
+                const { docs } = await fetchCollection(EXPENSE_ITEMS)
                     .where('uid', '==', getCurrentUserUid())
                     .where('year', '==', year)
                     .orderBy('date', 'desc').get();

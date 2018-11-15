@@ -52,6 +52,7 @@
                 <label for="categories">
                     Category
                     <a 
+                        target="_blank"
                         href="https://blog.stridehealth.com/post/top-1099-write-offs" 
                         class="small text-muted">About Categories</a>
                 </label>
@@ -73,9 +74,15 @@
 
         <div class="col-md-12">
             <button 
-                :disabled="createIsDisabled" 
+                :disabled="createIsDisabled || savingExpenseItem" 
                 class="btn btn-primary"
-                @click="handleCreateExpense">Save</button>
+                @click="handleCreateExpense">
+                Save
+                <i 
+                    v-if="savingExpenseItem" 
+                    class="fa fa-spinner fa-spin"
+                />
+            </button>
         </div>
     </div>
 </template>
@@ -99,6 +106,7 @@ export default {
     data() {
         return {
             expenseItem: { ...initialExpenseItem },
+            savingExpenseItem: false
         }
     },
 
@@ -123,13 +131,22 @@ export default {
     },
 
     methods: {
+        formatItemPayload() {
+            return {
+                ...this.expenseItem,
+                year: this.currentYear.format('YYYY'),
+                amount: Number(this.expenseItem.amount).toFixed(2)
+            };
+        },
+
         async handleCreateExpense() {
-            const payload = { ...this.expenseItem, year: this.currentYear.format('YYYY') };
-            const expenseItem = await this.$createExpenseItem(payload);
+            this.savingExpenseItem = true;
+            const expenseItem = await this.$createExpenseItem(this.formatItemPayload());
 
             // Error has occured, don't reset form
             if (!expenseItem) return;
 
+            this.savingExpenseItem = false;
             this.addExpenseItem(expenseItem);
             this.resetExpenseItem();
         },

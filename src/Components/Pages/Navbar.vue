@@ -41,8 +41,10 @@
                             class="dropdown-menu col-md-12 col-sm-12" 
                             aria-labelledby="navbarDropdownMenuLink">
                             <router-link 
-                                to="/dashboard" 
-                                class="dropdown-item">Dashboard</router-link>
+                                to="/expenses" 
+                                class="dropdown-item">Expenses
+                            </router-link>
+
                             <span 
                                 class="dropdown-item" 
                                 @click="$firebaseLogout">Logout</span>
@@ -54,8 +56,10 @@
                     v-if="isAuthed" 
                     class="nav-item dropdown user-dropdown-mobile-menu">
                     <router-link 
-                        to="/dashboard" 
-                        class="nav-link">Dashboard</router-link>
+                        to="/expenses" 
+                        class="nav-link">Expenses
+                    </router-link>
+
                     <span 
                         class="nav-link" 
                         @click="$firebaseLogout">Logout</span>

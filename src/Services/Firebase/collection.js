@@ -17,3 +17,21 @@ export const fetchDocument = async documentRef => {
         throw new Error('Document could not be fetched.');  
     }
 }
+
+export const fetchCollection = collection => db.collection(collection);
+
+/**
+ * Return a formatted array of document object values. 
+ * 
+ * If a documentKey is passed in, only the values matching the documentKey on the document object will be returned.
+ * 
+ * @param {Array} documents
+ * @param {String} documentKey 
+ */
+export const mapDocuments = (documents, documentKey = null) => (
+    documents.map(document => {
+        const data = document.data();
+
+        return documentKey ? data[documentKey] : data;
+    })
+);

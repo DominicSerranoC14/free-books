@@ -16,7 +16,8 @@
             v-if="allExpenseYears && allExpenseYears.length" 
             class="my-4">
             <expense-year-list 
-                :all-expense-years="allExpenseYears" 
+                :all-expense-years="allExpenseYears"
+                :selected-expense-year="selectedExpenseYear"
                 :set-expense-year="setExpenseYear"
             />
         </div>
@@ -34,7 +35,8 @@ export default {
     props: {
         addExpenseYear: { type: Function, required: true },
         allExpenseYears: { type: Array, default: () => [] },
-        setExpenseYear: { type: Function, required: true }
+        setExpenseYear: { type: Function, required: true },
+        selectedExpenseYear: { type: String, default: () => '' }
     }
 }
 </script>

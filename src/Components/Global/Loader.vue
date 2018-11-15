@@ -3,7 +3,7 @@
         <h6 class="m-0 mr-2">Loading...</h6>
             
         <div>
-            <i class="fa fa-spinner fa-spin"/>
+            <i class="fa fa-spinner fa-spin "/>
         </div>
     </div>
 </template>

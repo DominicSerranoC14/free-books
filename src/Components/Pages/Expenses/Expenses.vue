@@ -13,6 +13,7 @@
                         <expense-year-menu 
                             :add-expense-year="addExpenseYear" 
                             :all-expense-years="allExpenseYears"
+                            :selected-expense-year="selectedExpenseYear"
                             :set-expense-year="setExpenseYear"
                         />
                     </template>
@@ -42,17 +43,20 @@
         <div class="col-md-8">
             <div class="row">
                 <expense-year-summary 
-                    :selected-expense-year="selectedExpenseYear" 
+                    :annual-total="selectedExpenseYearAnnualTotal"
+                    :selected-expense-year="selectedExpenseYear"
                     class="col-md-12" 
                 />
 
                 <loader 
                     v-if="loadingItems" 
-                    class="col-md-12" />
+                    class="col-md-12" 
+                />
 
                 <expense-item-list
                     v-if="expenseItems && !loadingItems"
                     :expense-items="expenseItems"
+                    :remove-expense-item="removeExpenseItem"
                     class="col-md-12"
                 />
             </div>
@@ -98,6 +102,16 @@ export default {
         }
     },
 
+    computed: {
+        selectedExpenseYearAnnualTotal() {
+            if (!this.expenseItems || !this.expenseItems.length) return null;
+
+            const allItemAmounts = this.expenseItems.map(item => Number(item.amount));
+
+            return allItemAmounts.reduce((prev, current) => prev + current).toFixed(2);
+        }
+    },
+
     watch: {
         selectedExpenseYear(year) {
             if (!year) return;
@@ -124,6 +138,10 @@ export default {
             this.loadingItems = true;
             this.expenseItems = await this.$getExpenseItemsByYear(this.selectedExpenseYear);
             this.loadingItems = false;
+        },
+
+        removeExpenseItem(itemkey) {
+            this.expenseItems = this.expenseItems.filter(item => item.id !== itemkey);
         },
 
         setExpenseYear(year) {

@@ -12,9 +12,16 @@
 
             <div class="input-group-append">
                 <button 
+                    :disabled="savingExpenseYear"
                     class="btn btn-outline-primary"
-                    type="button" 
-                    @click="handleSaveClick">Save</button>
+                    type="button"
+                    @click="handleSaveClick">
+                    Save
+                    <i 
+                        v-if="savingExpenseYear" 
+                        class="fa fa-spinner fa-spin"
+                    />
+                </button>
             </div>
         </div>
     </div>
@@ -37,14 +44,17 @@ export default {
         return {
             currentYear,
             expenseYear: currentYear,
+            savingExpenseYear: false
         }
     },
 
     methods: {
         async handleSaveClick() {
+            this.savingExpenseYear = true;
             const newExspenseYear = await this.$createExpenseYear(this.expenseYear);
             
             if (newExspenseYear) this.addExpenseYear(newExspenseYear);
+            this.savingExpenseYear = false;
         }
     }
 }

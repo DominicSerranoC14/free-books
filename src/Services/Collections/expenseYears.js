@@ -1,6 +1,5 @@
-import db from '@/Services/Firebase/database.js';
 import { getCurrentUserUid } from '@/Services/Firebase/auth.js';
-import { createDocument } from '@/Services/Firebase/collection.js';
+import { createDocument, fetchCollection, mapDocuments } from '@/Services/Firebase/collection.js';
 
 const EXPENSE_YEARS = 'expenseYears';
 
@@ -8,10 +7,12 @@ export default {
     methods: {
         async $createExpenseYear(year) {
             try {
-                const { docs } = await db.collection(EXPENSE_YEARS).where('year', '==', year).get();
-                const expenseYears = docs.map(doc => doc.data().year);
-
-                if (expenseYears.includes(year)) {
+                const { docs } = await fetchCollection(EXPENSE_YEARS)
+                    .where('uid', '==', getCurrentUserUid())
+                    .where('year', '==', year).get();
+                
+                // Do not allow duplicate expense years for individual users
+                if (mapDocuments(docs, 'year').includes(year)) {
                     throw new Error('Expense year already exists.');
                 }
 
@@ -23,9 +24,10 @@ export default {
 
         async $getAllExpenseYears() {
             try {
-                const { docs } = await db.collection(EXPENSE_YEARS).where('uid', '==', getCurrentUserUid()).get();
+                const { docs } = await fetchCollection(EXPENSE_YEARS)
+                    .where('uid', '==', getCurrentUserUid()).get();
 
-                return docs.map(doc => doc.data());
+                return mapDocuments(docs);
             } catch (error) {
                 this.$swal('Error', error.message, 'error');
             }

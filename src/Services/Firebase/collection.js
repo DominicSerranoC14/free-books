@@ -12,7 +12,8 @@ export const createDocument = async (collection, payload) => {
 export const fetchDocument = async documentRef => {
     try {
         const document = await documentRef.get();
-        return document.exists ? document.data() : null;
+        // Ensure the document retrieved has its unique id
+        return document.exists ? { ...document.data(), id: document.id } : null;
     } catch (error) {
         throw new Error('Document could not be fetched.');  
     }
